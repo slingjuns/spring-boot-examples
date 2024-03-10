@@ -4,6 +4,7 @@ import com.example.AntraHW.services.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,11 +26,13 @@ public class SearchController {
     }
 
     @GetMapping("/sync/get")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<String> getSync(@RequestParam("country") List<String> countries){
         return new ResponseEntity<>(searchService.getSync(countries), HttpStatus.OK);
     }
 
     @GetMapping("/async/get")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<String> getAsync(@RequestParam("country") List<String> countries) throws ExecutionException, InterruptedException{
         return new ResponseEntity<>(searchService.getAsync(countries), HttpStatus.OK);
     }

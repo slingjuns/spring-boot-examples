@@ -21,8 +21,6 @@ public class AntraHWApplication {
 		return builder.build();
 	}
 
-	@Bean
-
 	public static void main(String[] args) {
 		SpringApplication.run(AntraHWApplication.class, args);
 	}
